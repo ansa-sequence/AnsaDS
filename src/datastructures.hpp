@@ -39,6 +39,8 @@ namespace ansa_algo
 			std::cout << '\n';
 		}
 
+		std::size_t getSize() const { return size; }
+
 		void insertionBegin(T val)
 		{
 			insertAtIndex(0, val);
@@ -106,9 +108,7 @@ namespace ansa_algo
 		ListNode<T>* getNode(T val)
 		{
 			auto current = head;
-			if (size == 1)
-				return head;
-			while (current->next != nullptr)
+			while (current != nullptr)
 			{
 				if (current->val == val)
 				{

@@ -1,6 +1,13 @@
 #include <iostream>
 
+#include "src/datastructures.hpp"
+
 int main()
 {
-	std::cout << "Hello World from AlgoAPI!\n";
+	auto node    = ansa_algo::ListNode<int>(1);
+	auto current = new ansa_algo::ListNode<int>();
+	while (current != nullptr)
+	{
+		current = current->next;
+	}
 }
