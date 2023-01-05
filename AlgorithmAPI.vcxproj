@@ -133,8 +133,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="algorithms.hpp" />
-    <ClInclude Include="datastructures.hpp" />
+    <ClInclude Include="src\algorithms.hpp" />
+    <ClInclude Include="src\datastructures.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

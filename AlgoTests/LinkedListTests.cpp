@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../datastructures.hpp"
+#include "../src/datastructures.hpp"
 
 namespace linkedListTest
 {
