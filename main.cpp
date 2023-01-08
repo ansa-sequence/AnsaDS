@@ -1,13 +1,39 @@
 #include <iostream>
 
-#include "src/datastructures.hpp"
+struct ListNode
+{
+	int       val;
+	ListNode* next;
+
+	ListNode(int x) : val(x), next(nullptr)
+	{
+	}
+};
+
+class Solution
+{
+public:
+	bool hasCycle(ListNode* head)
+	{
+		auto header  = head;
+		auto current = head;
+		while (current != nullptr)
+		{
+			current = current->next;
+			if (current == header)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+};
 
 int main()
 {
-	auto node    = ansa_algo::ListNode<int>(1);
-	auto current = new ansa_algo::ListNode<int>();
-	while (current != nullptr)
-	{
-		current = current->next;
-	}
+	Solution solution;
+	auto     node    = new ListNode(1);
+	node->next       = new ListNode(2);
+	node->next->next = node;
+	solution.hasCycle(node);
 }

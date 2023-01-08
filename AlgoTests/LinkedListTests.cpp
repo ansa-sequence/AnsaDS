@@ -73,4 +73,30 @@ namespace linkedListTest
 		// Assert
 		EXPECT_EQ(1, result->val);
 	}
+
+	TEST(Insertion, ValidNodeAfterInsertions)
+	{
+		// Arrange
+		const auto list = new ansa_algo::LinkedList<int>();
+		// Act
+		constexpr std::size_t elementCount = 10;
+		for (std::size_t i = 0; i < elementCount; ++i)
+		{
+			list->insertionEnd(static_cast<int>(i));
+		}
+		// Assert
+		const auto secondList = new ansa_algo::LinkedList<int>();
+		secondList->insertionEnd(0);
+		secondList->insertionEnd(1);
+		secondList->insertionEnd(2);
+		secondList->insertionEnd(3);
+		secondList->insertionEnd(4);
+		secondList->insertionEnd(5);
+		secondList->insertionEnd(6);
+		secondList->insertionEnd(7);
+		secondList->insertionEnd(8);
+		secondList->insertionEnd(9);
+		const bool isTheSame = list->equal(secondList);
+		EXPECT_EQ(true, isTheSame);
+	}
 }

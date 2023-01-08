@@ -118,5 +118,61 @@ namespace ansa_algo
 			}
 			return nullptr;
 		}
+
+		bool equal(const LinkedList<T>* rhs)
+		{
+			if (size != rhs->size)
+			{
+				return false;
+			}
+			auto current    = head;
+			auto currentRhs = rhs->head;
+			while (current != nullptr && currentRhs != nullptr)
+			{
+				if (current->val != currentRhs->val)
+				{
+					return false;
+				}
+				current    = current->next;
+				currentRhs = currentRhs->next;
+			}
+			return true;
+		}
+
+		void reverse()
+		{
+			if (head == nullptr)
+			{
+				return;
+			}
+			auto         current  = head;
+			ListNode<T>* previous = nullptr;
+			while (current != nullptr)
+			{
+				auto next     = current->next;
+				current->next = previous;
+				previous      = current;
+
+				current = next;
+			}
+			head = previous;
+		}
+
+		void deleteDuplicates()
+		{
+			auto current = head;
+			while (current && current->next)
+			{
+				auto next = current->next;
+				if (current->val == next->val)
+				{
+					current->next = next->next;
+				}
+				else
+				{
+					current = current->next;
+				}
+			}
+		}
 	};
 }
