@@ -134,7 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\algorithms.hpp" />
-    <ClInclude Include="src\datastructures.hpp" />
+    <ClInclude Include="src\linkedlist.hpp" />
+    <ClInclude Include="src\set.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

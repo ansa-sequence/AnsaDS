@@ -34,6 +34,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClCompile Include="LinkedListTests.cpp" />
+    <ClCompile Include="SetTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlgorithmAPI.vcxproj">

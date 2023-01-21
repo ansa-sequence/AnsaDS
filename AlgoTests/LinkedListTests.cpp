@@ -1,7 +1,7 @@
 #include <random>
 
 #include "gtest/gtest.h"
-#include "../src/datastructures.hpp"
+#include "../src/linkedlist.hpp"
 
 namespace linkedListTest
 {

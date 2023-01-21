@@ -23,7 +23,10 @@
     <ClInclude Include="src\algorithms.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\datastructures.hpp">
+    <ClInclude Include="src\linkedlist.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\set.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
