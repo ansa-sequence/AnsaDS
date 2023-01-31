@@ -33,8 +33,10 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="HeapTests.cpp" />
     <ClCompile Include="LinkedListTests.cpp" />
     <ClCompile Include="SetTests.cpp" />
+    <ClCompile Include="StackTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlgorithmAPI.vcxproj">
