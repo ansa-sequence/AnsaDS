@@ -32,8 +32,10 @@ namespace ansa_algo
 
 	inline void Merge(std::vector<int>& array, std::size_t left, std::size_t mid, std::size_t right)
 	{
-		auto lefter  = std::vector<int>(array.begin() + left, array.begin() + mid);
-		auto righter = std::vector<int>(array.begin() + mid, array.begin() + right);
+		auto lefter = std::vector<int>(array.begin() + static_cast<long long>(left),
+		                               array.begin() + static_cast<long long>(mid));
+		auto righter = std::vector<int>(array.begin() + static_cast<long long>(mid),
+		                                array.begin() + static_cast<long long>(right));
 
 		lefter.push_back(std::numeric_limits<int>::max());
 		righter.push_back(std::numeric_limits<int>::max());

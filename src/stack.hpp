@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <vector>
 
 namespace ansa_algo
@@ -7,7 +6,7 @@ namespace ansa_algo
 	template <typename T>
 	struct Stack
 	{
-		Stack(std::vector<int> elements)
+		explicit Stack(const std::vector<int>& elements)
 		{
 			mData = elements;
 		}

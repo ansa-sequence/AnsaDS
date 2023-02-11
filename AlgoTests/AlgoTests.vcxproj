@@ -33,6 +33,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="BinaryTreeTest.cpp" />
     <ClCompile Include="HeapTests.cpp" />
     <ClCompile Include="LinkedListTests.cpp" />
     <ClCompile Include="SetTests.cpp" />

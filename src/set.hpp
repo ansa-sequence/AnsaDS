@@ -18,7 +18,7 @@ namespace ansa_algo
 	};
 
 	template <typename T>
-	struct StaticSet : ISet<T>
+	struct StaticSet final : ISet<T>
 	{
 		void build(std::vector<T> elements) override
 		{
