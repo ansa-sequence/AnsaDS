@@ -56,7 +56,7 @@ namespace ansa_algo
 			std::size_t       left      = getLeft(index);
 			std::size_t       right     = getRight(index);
 			std::size_t       largest   = index;
-			const std::size_t validSize = blockerSize != (blockerSize - 1) ? blockerSize : mStorage.size();
+			const std::size_t validSize = blockerSize != (0u - 1) ? blockerSize : mStorage.size();
 
 			if (left < validSize && mStorage[left] > mStorage[index])
 			{
