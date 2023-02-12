@@ -59,4 +59,18 @@ namespace heapTests
 		// Assert
 		EXPECT_EQ(equalityObject, heap);
 	}
+
+	TEST(Sorting, ValidSorting)
+	{
+		// Act
+		auto object = ansa_algo::Heap({4, 1, 3, 2, 16, 9, 10, 14, 8, 7});
+		// Arrange
+		object.heapsort();
+		// Assert
+		const auto storage = object.getHeap();
+		for (std::size_t i = 0; i < storage.size() - 1; ++i)
+		{
+			EXPECT_FALSE(storage[i] > storage[i + 1]);
+		}
+	}
 }

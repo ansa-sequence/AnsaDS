@@ -51,18 +51,19 @@ namespace ansa_algo
 		* and swaps the element with the largest child if the heap property is violated.
 		* The process continues recursively until the heap property is satisfied.
 		*/
-		void heapify(std::size_t index)
+		void heapify(std::size_t index, std::size_t blockerSize = -1)
 		{
-			std::size_t left    = getLeft(index);
-			std::size_t right   = getRight(index);
-			std::size_t largest = index;
+			std::size_t       left      = getLeft(index);
+			std::size_t       right     = getRight(index);
+			std::size_t       largest   = index;
+			const std::size_t validSize = blockerSize != (blockerSize - 1) ? blockerSize : mStorage.size();
 
-			if (left < mStorage.size() && mStorage[left] > mStorage[index])
+			if (left < validSize && mStorage[left] > mStorage[index])
 			{
 				largest = left;
 			}
 
-			if (right < mStorage.size() && mStorage[right] > mStorage[largest])
+			if (right < validSize && mStorage[right] > mStorage[largest])
 			{
 				largest = right;
 			}
@@ -70,7 +71,7 @@ namespace ansa_algo
 			if (largest != index)
 			{
 				std::swap(mStorage[index], mStorage[largest]);
-				heapify(largest);
+				heapify(largest, validSize);
 			}
 		}
 
@@ -79,6 +80,18 @@ namespace ansa_algo
 			for (int i = static_cast<int>(mStorage.size() / 2 - 1); i >= 0; --i)
 			{
 				heapify(i);
+			}
+		}
+
+		void heapsort()
+		{
+			buildHeap();
+			std::size_t heapSize = mStorage.size();
+			for (int i = static_cast<int>(mStorage.size() - 1); i >= 0; --i)
+			{
+				std::swap(mStorage[0], mStorage[i]);
+				--heapSize;
+				heapify(0, heapSize);
 			}
 		}
 

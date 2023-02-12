@@ -52,9 +52,9 @@ namespace ansa_algo
 		{
 			auto temp = mRoot;
 			if (!temp) return nullptr;
-			while (temp->left)
+			while (temp->mLeft)
 			{
-				temp = temp->left;
+				temp = temp->mLeft;
 			}
 			return temp;
 		}
@@ -63,9 +63,9 @@ namespace ansa_algo
 		{
 			if (!root) return nullptr;
 			auto temp = root;
-			while (root->left)
+			while (root->mLeft)
 			{
-				temp = root->left;
+				temp = root->mLeft;
 			}
 			return temp;
 		}
@@ -74,21 +74,24 @@ namespace ansa_algo
 		{
 			auto temp = mRoot;
 			if (!temp) return nullptr;
-			while (temp->right)
+			while (temp->mRight)
 			{
-				temp = temp->right;
+				temp = temp->mRight;
 			}
 			return temp;
 		}
 
-		Bnode<T>* successor(Bnode<T>* root)
+		Bnode<T>* getMaximumByNode(Bnode<T>* root)
 		{
-			auto node = root;
-			if (node->right)
+			if (!root) return nullptr;
+			auto temp = root;
+			while (root->mRight)
 			{
-				return getMinimumBy(node->right);
+				temp = root->mRight;
 			}
+			return temp;
 		}
+
 
 		~BinaryTree()
 		{
