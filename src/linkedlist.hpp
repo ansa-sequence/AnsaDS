@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-namespace ansa_algo
+namespace ansa
 {
 	template <typename T>
 	struct ListNode

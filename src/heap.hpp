@@ -2,8 +2,9 @@
 #include <vector>
 #include <iostream>
 
-namespace ansa_algo
+namespace ansa
 {
+	// TODO : Please in near feature rewrite this to one Heap data structure with template parameter which will be change Heapify property.
 	template <typename T>
 	struct Heap
 	{
@@ -11,52 +12,29 @@ namespace ansa_algo
 		{
 		}
 
-		/**
-		 * \brief Retrieves the index of the parent element in a binary heap
-		 * \param index The index of the element in the heap
-		 * \return The index of the parent element, or std::size_t overflow if the index is invalid
-		 */
 		std::size_t getParent(std::size_t index) const
 		{
 			return index <= 0 || index > mStorage.size() ? -1 : (index - 1) / 2;
 		}
 
-		/**
-		 * \brief Retrieves the index of the left child element in a binary heap
-		 * \param index The index of the element in the heap
-		 * \return The index of the left child element, or std::size_t overflow if the child does not exist
-		 */
 		std::size_t getLeft(std::size_t index) const
 		{
 			std::size_t left = 2 * index + 1;
 			return left >= mStorage.size() ? -1 : left;
 		}
 
-		/**
-		 * \brief Retrieves the index of the right child element in a binary heap
-		 * \param index The index of the element in the heap
-		 * \return The index of the right child element, or std::size_t overflow if the child does not exist
-		 */
 		std::size_t getRight(std::size_t index) const
 		{
 			std::size_t right = 2 * index + 2;
 			return right >= mStorage.size() ? -1 : right;
 		}
 
-		/**
-		* \brief Maintains the heap property of a binary heap.
-		* \param index The index of the element to start heapifying from.
-		*
-		* This method compares the element at the given `index` to its left and right children,
-		* and swaps the element with the largest child if the heap property is violated.
-		* The process continues recursively until the heap property is satisfied.
-		*/
 		void heapify(std::size_t index, std::size_t blockerSize = -1)
 		{
 			std::size_t       left      = getLeft(index);
 			std::size_t       right     = getRight(index);
 			std::size_t       largest   = index;
-			const std::size_t validSize = blockerSize != (0u - 1) ? blockerSize : mStorage.size();
+			const std::size_t validSize = blockerSize != (static_cast<size_t>(0) - 1) ? blockerSize : mStorage.size();
 
 			if (left < validSize && mStorage[left] > mStorage[index])
 			{

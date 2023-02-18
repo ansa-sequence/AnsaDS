@@ -133,11 +133,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\algorithms.hpp" />
+    <ClInclude Include="src\constraints.hpp" />
+    <ClInclude Include="src\sorting.hpp" />
     <ClInclude Include="src\binarytree.hpp" />
-    <ClInclude Include="src\heapp.hpp" />
+    <ClInclude Include="src\heap.hpp" />
     <ClInclude Include="src\lfucache.hpp" />
     <ClInclude Include="src\linkedlist.hpp" />
+    <ClInclude Include="src\pqueue.hpp" />
     <ClInclude Include="src\set.hpp" />
     <ClInclude Include="src\stack.hpp" />
   </ItemGroup>

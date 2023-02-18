@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ansa_algo
+namespace ansa
 {
 	template <typename T>
 	struct Bnode
@@ -92,46 +92,81 @@ namespace ansa_algo
 			return temp;
 		}
 
+		Bnode<T>* erase(Bnode<T>* node, const T& value)
+		{
+			if (node == nullptr)
+			{
+				return nullptr;
+			}
+			if (value < node->mVal)
+			{
+				node->mLeft = erase(node->mLeft, value);
+			}
+			else if (value > node->mVal)
+			{
+				node->mRight = erase(node->mRight, value);
+			}
+			else
+			{
+				if (node->mLeft == nullptr && node->mRight == nullptr)
+				{
+					delete node;
+					node = nullptr;
+				}
+				else if (node->mLeft == nullptr)
+				{
+					Bnode<T>* temp = node;
+					node           = node->mRight;
+					temp->mRight   = nullptr;
+					delete temp;
+				}
+				else if (node->mRight == nullptr)
+				{
+					Bnode<T>* temp = node;
+					node           = node->mLeft;
+					temp->mLeft    = nullptr;
+					delete temp;
+				}
+				else
+				{
+					Bnode<T>* minNode = getMinimumBy(node->mRight);
+					node->mVal        = minNode->mVal;
+					node->mRight      = erase(node->mRight, minNode->mVal);
+				}
+			}
+			return node;
+		}
+
+		void insert(const T& value)
+		{
+			mRoot = insertRecursive(mRoot, value);
+		}
+
+		Bnode<T>* getRoot() const { return mRoot; }
 
 		~BinaryTree()
 		{
 			delete mRoot;
 		}
 
+	private:
+		Bnode<T>* insertRecursive(Bnode<T>* node, const T& value)
+		{
+			if (node == nullptr)
+			{
+				node = new Bnode<T>(value);
+			}
+			else if (value < node->mVal)
+			{
+				node->mLeft = insertRecursive(node->mLeft, value);
+			}
+			else if (value > node->mVal)
+			{
+				node->mRight = insertRecursive(node->mRight, value);
+			}
+			return node;
+		}
+
 		Bnode<T>* mRoot;
 	};
-
-	template <typename T>
-	Bnode<T>* insert(Bnode<T>* root, T val)
-	{
-		if (root == nullptr)
-		{
-			return new Bnode(val);
-		}
-		if (val < root->mVal)
-		{
-			root->mLeft = insert(root->mLeft, val);
-		}
-		else
-		{
-			root->mRight = insert(root->mRight, val);
-		}
-		return root;
-	}
-
-	template <typename T>
-	Bnode<T>* erase(Bnode<T>* root, T val)
-	{
-		if (root == nullptr)
-		{
-			return root;
-		}
-
-		const auto tree = new BinaryTree<T>(root);
-		auto       node = tree->searchElement(val);
-
-		while (root)
-		{
-		}
-	}
 }

@@ -8,7 +8,7 @@ namespace linkedListTest
 	TEST(Insertion, InsertionIntoBegin)
 	{
 		// Arrange
-		const auto list = new ansa_algo::LinkedList<int>();
+		const auto list = new ansa::LinkedList<int>();
 		list->insertionBegin(4);
 		// Act
 		const auto result = list->getNode(4);
@@ -19,7 +19,7 @@ namespace linkedListTest
 	TEST(Insertion, insertionIntoEnd)
 	{
 		// Arrange
-		const auto list = new ansa_algo::LinkedList<int>();
+		const auto list = new ansa::LinkedList<int>();
 		list->insertionEnd(4);
 		// Act
 		const auto result = list->getNode(4);
@@ -30,7 +30,7 @@ namespace linkedListTest
 	TEST(Insertion, InsertionAtUnreachableIndex)
 	{
 		// Arrange
-		const auto    list  = new ansa_algo::LinkedList<int>();
+		const auto    list  = new ansa::LinkedList<int>();
 		constexpr int val   = 1;
 		constexpr int index = 10;
 		list->insertAtIndex(index, val);
@@ -43,7 +43,7 @@ namespace linkedListTest
 	TEST(Insertion, InsertionAtReachableIndex)
 	{
 		// Arrange
-		const auto    list  = new ansa_algo::LinkedList<int>();
+		const auto    list  = new ansa::LinkedList<int>();
 		constexpr int val   = 1;
 		constexpr int index = 0;
 		list->insertAtIndex(index, val);
@@ -56,7 +56,7 @@ namespace linkedListTest
 	TEST(Insertion, InsertionInMiddle)
 	{
 		// Arrange
-		const auto list = new ansa_algo::LinkedList<int>();
+		const auto list = new ansa::LinkedList<int>();
 
 		std::random_device                 rd;
 		std::mt19937                       mt(rd());
@@ -77,7 +77,7 @@ namespace linkedListTest
 	TEST(Insertion, ValidNodeAfterInsertions)
 	{
 		// Arrange
-		const auto list = new ansa_algo::LinkedList<int>();
+		const auto list = new ansa::LinkedList<int>();
 		// Act
 		constexpr std::size_t elementCount = 10;
 		for (std::size_t i = 0; i < elementCount; ++i)
@@ -85,7 +85,7 @@ namespace linkedListTest
 			list->insertionEnd(static_cast<int>(i));
 		}
 		// Assert
-		const auto secondList = new ansa_algo::LinkedList<int>();
+		const auto secondList = new ansa::LinkedList<int>();
 		secondList->insertionEnd(0);
 		secondList->insertionEnd(1);
 		secondList->insertionEnd(2);

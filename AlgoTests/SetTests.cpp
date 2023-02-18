@@ -7,7 +7,7 @@ namespace setTests
 	{
 		// Arrange
 		const std::vector items{1, 3, 2, 5, 6, 8, 0};
-		auto              set = ansa_algo::StaticSet<int>{};
+		auto              set = ansa::StaticSet<int>{};
 		set.build(items);
 		// Act
 		const auto result = set.find(5);
@@ -19,7 +19,7 @@ namespace setTests
 	{
 		// Arrange
 		const std::vector items{1, 3, 2, 5, 6, 8, 0};
-		auto              set = ansa_algo::StaticSet<int>{};
+		auto              set = ansa::StaticSet<int>{};
 		set.build(items);
 		// Act
 		const auto result = set.find(44);
@@ -31,7 +31,7 @@ namespace setTests
 	{
 		// Arrange
 		const std::vector items{1, 3, 2, 5, 6, 8, 0};
-		auto              set = ansa_algo::StaticSet<int>{};
+		auto              set = ansa::StaticSet<int>{};
 		set.build(items);
 		// Act
 		const auto result = set.findMin();
@@ -42,7 +42,7 @@ namespace setTests
 	TEST(Find, InvalidMinimalElement)
 	{
 		// Arrange
-		const auto set = ansa_algo::StaticSet<int>{};
+		const auto set = ansa::StaticSet<int>{};
 		// Act
 		const auto result = set.findMin();
 		// ASSERT

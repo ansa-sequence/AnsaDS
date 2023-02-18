@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-namespace ansa_algo
+namespace ansa
 {
 	template <typename T>
 	struct ISet
@@ -72,6 +72,8 @@ namespace ansa_algo
 		{
 			return !mContainer.empty() ? *mContainer.rbegin() : T{};
 		}
+
+		~StaticSet() override = default;
 
 	private:
 		std::vector<T> mContainer;

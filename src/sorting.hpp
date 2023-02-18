@@ -1,7 +1,9 @@
 #pragma once
 #include <vector>
+#include "constraints.hpp"
+#include "heap.hpp"
 
-namespace ansa_algo
+namespace ansa
 {
 	template <typename Compare>
 	void InsertionSort(std::vector<int>& vec, Compare cmp)
@@ -68,6 +70,19 @@ namespace ansa_algo
 		}
 	}
 
+	template <constraints::IterativeSorting I>
+	bool IsSorted(const I& container)
+	{
+		for (std::size_t i = 0; i < std::size(container) - 1; ++i)
+		{
+			if (container[i] > container[i + 1])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
 	template <typename T>
 	auto MinMaxElement(const std::vector<T>& elements)
 	{
@@ -77,5 +92,14 @@ namespace ansa_algo
 			result.first  = std::min(result.first, element);
 			result.second = std::max(result.second, element);
 		}
+		return result;
+	}
+
+	template <typename T>
+	auto HeapSort(const std::vector<T>& elements)
+	{
+		Heap<T> heap{elements};
+		heap.heapsort();
+		return heap.getHeap();
 	}
 }

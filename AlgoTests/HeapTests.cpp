@@ -1,11 +1,11 @@
 #include <gtest/gtest.h>
-#include "../src/heapp.hpp"
+#include "../src/heap.hpp"
 
 namespace heapTests
 {
 	TEST(HeapTest, TestGetParent)
 	{
-		const ansa_algo::Heap heap({3, 2, 1, 7, 8, 4, 10, 16, 12});
+		const ansa::Heap heap({3, 2, 1, 7, 8, 4, 10, 16, 12});
 
 		EXPECT_EQ(heap.getParent(0), static_cast<std::size_t>(-1));
 		EXPECT_EQ(heap.getParent(1), 0);
@@ -20,7 +20,7 @@ namespace heapTests
 
 	TEST(HeapTest, TestGetLeft)
 	{
-		const ansa_algo::Heap heap({3, 2, 1, 7, 8, 4, 10, 16, 12});
+		const ansa::Heap heap({3, 2, 1, 7, 8, 4, 10, 16, 12});
 
 		EXPECT_EQ(heap.getLeft(0), 1);
 		EXPECT_EQ(heap.getLeft(1), 3);
@@ -35,7 +35,7 @@ namespace heapTests
 
 	TEST(HeapTest, TestGetRight)
 	{
-		const ansa_algo::Heap heap({3, 2, 1, 7, 8, 4, 10, 16, 12});
+		const ansa::Heap heap({3, 2, 1, 7, 8, 4, 10, 16, 12});
 
 		EXPECT_EQ(heap.getRight(0), 2);
 		EXPECT_EQ(heap.getRight(1), 4);
@@ -51,7 +51,7 @@ namespace heapTests
 	TEST(Sorting, ValidBuild)
 	{
 		// Act
-		auto object = ansa_algo::Heap({4, 1, 3, 2, 16, 9, 10, 14, 8, 7});
+		auto object = ansa::Heap({4, 1, 3, 2, 16, 9, 10, 14, 8, 7});
 		// Arrange
 		object.buildHeap();
 		const auto& heap           = object.getHeap();
@@ -63,7 +63,7 @@ namespace heapTests
 	TEST(Sorting, ValidSorting)
 	{
 		// Act
-		auto object = ansa_algo::Heap({4, 1, 3, 2, 16, 9, 10, 14, 8, 7});
+		auto object = ansa::Heap({4, 1, 3, 2, 16, 9, 10, 14, 8, 7});
 		// Arrange
 		object.heapsort();
 		// Assert

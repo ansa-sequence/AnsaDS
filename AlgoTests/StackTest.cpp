@@ -6,7 +6,7 @@ namespace stackTests
 	TEST(PopOperations, ValidPop)
 	{
 		// Act
-		auto stack = ansa_algo::Stack<int>({});
+		auto stack = ansa::Stack<int>({});
 		// Arrange
 		stack.push(5);
 		stack.pop();

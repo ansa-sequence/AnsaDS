@@ -36,7 +36,9 @@
     <ClCompile Include="BinaryTreeTest.cpp" />
     <ClCompile Include="HeapTests.cpp" />
     <ClCompile Include="LinkedListTests.cpp" />
+    <ClCompile Include="PriorityQueueTests.cpp" />
     <ClCompile Include="SetTests.cpp" />
+    <ClCompile Include="SortTests.cpp" />
     <ClCompile Include="StackTest.cpp" />
   </ItemGroup>
   <ItemGroup>

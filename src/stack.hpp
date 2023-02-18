@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-namespace ansa_algo
+namespace ansa
 {
 	template <typename T>
 	struct Stack
