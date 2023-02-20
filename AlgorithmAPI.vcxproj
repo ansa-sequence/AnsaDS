@@ -134,6 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\constraints.hpp" />
+    <ClInclude Include="src\formulas.hpp" />
+    <ClInclude Include="src\searching.hpp" />
     <ClInclude Include="src\sorting.hpp" />
     <ClInclude Include="src\binarytree.hpp" />
     <ClInclude Include="src\heap.hpp" />

@@ -47,5 +47,11 @@
     <ClInclude Include="src\constraints.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\searching.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\formulas.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

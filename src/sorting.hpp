@@ -2,6 +2,7 @@
 #include <vector>
 #include "constraints.hpp"
 #include "heap.hpp"
+#include "pqueue.hpp"
 
 namespace ansa
 {
@@ -34,10 +35,10 @@ namespace ansa
 
 	inline void Merge(std::vector<int>& array, std::size_t left, std::size_t mid, std::size_t right)
 	{
-		auto lefter = std::vector<int>(array.begin() + static_cast<long long>(left),
-		                               array.begin() + static_cast<long long>(mid));
-		auto righter = std::vector<int>(array.begin() + static_cast<long long>(mid),
-		                                array.begin() + static_cast<long long>(right));
+		auto lefter = std::vector(array.begin() + static_cast<long long>(left),
+		                          array.begin() + static_cast<long long>(mid));
+		auto righter = std::vector(array.begin() + static_cast<long long>(mid),
+		                           array.begin() + static_cast<long long>(right));
 
 		lefter.push_back(std::numeric_limits<int>::max());
 		righter.push_back(std::numeric_limits<int>::max());
@@ -70,7 +71,7 @@ namespace ansa
 		}
 	}
 
-	template <constraints::IterativeSorting I>
+	template <constraints::IterativeSortableContainer I>
 	bool IsSorted(const I& container)
 	{
 		for (std::size_t i = 0; i < std::size(container) - 1; ++i)
@@ -101,5 +102,18 @@ namespace ansa
 		Heap<T> heap{elements};
 		heap.heapsort();
 		return heap.getHeap();
+	}
+
+	template <typename T>
+	auto HeapSortQueue(const std::vector<T>& elements)
+	{
+		Pqueue<T> queue{elements};
+
+		std::vector<int>  result{};
+		const std::size_t storageSize = queue.size();
+		for (std::size_t i = 0; i < storageSize; ++i)
+		{
+			result.push_back(queue.removeMinElement());
+		}
 	}
 }

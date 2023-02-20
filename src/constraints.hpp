@@ -31,7 +31,7 @@ namespace ansa::constraints
 	concept IterableLessThan = std::ranges::range<T> && LessThan<std::ranges::range_value_t<T>>;
 
 	template <typename T>
-	concept IterativeSorting = (IndexableGreaterThan<T> || IndexableLessThan<T>)
-	                           ||
-	                           (IterableGreaterThan<T> || IterableLessThan<T>);
+	concept IterativeSortableContainer = (IndexableGreaterThan<T> || IndexableLessThan<T>)
+	                                     ||
+	                                     (IterableGreaterThan<T> || IterableLessThan<T>);
 }

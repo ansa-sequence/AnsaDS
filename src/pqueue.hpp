@@ -11,7 +11,7 @@ namespace ansa
 		void insert(const T& x)
 		{
 			mTree.push_back(x);
-			int index = static_cast<int>(mTree.size() - 1);
+			std::size_t index = static_cast<int>(mTree.size() - 1);
 			while (index > 0 && mTree[index] < mTree[getParent(index)])
 			{
 				std::swap(mTree[index], mTree[getParent(index)]);
@@ -23,16 +23,16 @@ namespace ansa
 		{
 			auto res = mTree[0];
 			mTree[0] = mTree[mTree.size() - 1];
-			mTree.erase(mTree.begin() + (mTree.size() - 1));
-			int index = 0;
+			mTree.pop_back();
+			std::size_t index = 0;
 			while (true)
 			{
-				int j = index;
-				if (const int left = getLeft(index); left < mTree.size() && mTree[left] < mTree[j])
+				std::size_t j = index;
+				if (const std::size_t left = getLeft(index); left < mTree.size() && mTree[left] < mTree[j])
 				{
 					j = left;
 				}
-				if (const int right = getRight(index); right < mTree.size() && mTree[right] < mTree[j])
+				if (const std::size_t right = getRight(index); right < mTree.size() && mTree[right] < mTree[j])
 				{
 					j = right;
 				}
@@ -46,6 +46,8 @@ namespace ansa
 
 			return res;
 		}
+
+		std::size_t size() const { return mTree.size(); }
 
 	private:
 		std::size_t getParent(const std::size_t index) const
