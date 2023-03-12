@@ -42,6 +42,7 @@
     <ClCompile Include="SetTests.cpp" />
     <ClCompile Include="SortTests.cpp" />
     <ClCompile Include="StackTest.cpp" />
+    <ClCompile Include="VectorTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AlgorithmAPI.vcxproj">

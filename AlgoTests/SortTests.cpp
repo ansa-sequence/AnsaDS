@@ -19,6 +19,22 @@ TEST(InsertionSortTest, SortsDescending)
 	ASSERT_EQ(input, expected);
 }
 
+TEST(SelectionSortTest, SortsAscending)
+{
+	std::vector       input{5, 2, 4, 6, 1, 3};
+	const std::vector expected{1, 2, 3, 4, 5, 6};
+	ansa::SelectionSort(input, std::greater<int>{});
+	ASSERT_EQ(input, expected);
+}
+
+TEST(SelectionSortTest, SortsDescending)
+{
+	std::vector       input{5, 2, 4, 6, 1, 3};
+	const std::vector expected{6, 5, 4, 3, 2, 1};
+	ansa::SelectionSort(input, std::less<int>{});
+	ASSERT_EQ(input, expected);
+}
+
 TEST(LinearSearchTest, FindsElement)
 {
 	const std::vector     input{5, 2, 4, 6, 1, 3};

@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include <vector>
 #include "constraints.hpp"
 #include "heap.hpp"
@@ -19,6 +20,20 @@ namespace ansa
 				j -= 1;
 			}
 			vec[j + 1] = key;
+		}
+	}
+
+	inline void SelectionSort(std::vector<int>& array, const std::function<bool(int, int)>& comp)
+	{
+		for (std::size_t i = 0; i < array.size(); ++i)
+		{
+			for (std::size_t j = i + 1; j < array.size(); ++j)
+			{
+				if (comp(array[i], array[j]))
+				{
+					std::swap(array[i], array[j]);
+				}
+			}
 		}
 	}
 

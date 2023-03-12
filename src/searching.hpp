@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 namespace ansa
 {
@@ -18,6 +19,34 @@ namespace ansa
 				return i;
 			}
 		}
+		return -1;
+	}
+
+	template <typename T>
+	int BinarySearch(const std::vector<T>& vec, const T& target)
+	{
+		int low  = 0;
+		int high = vec.size() - 1;
+
+		while (low <= high)
+		{
+			int mid = (low + high) / 2;
+
+			if (vec[mid] == target)
+			{
+				return mid;
+			}
+			if (vec[mid] < target)
+			{
+				low = mid + 1;
+			}
+			else
+			{
+				high = mid - 1;
+			}
+		}
+
+		// If we get here, the target element is not in the vector
 		return -1;
 	}
 }
