@@ -18,7 +18,6 @@ namespace ansa
 			std::copy(source, source + N, mData.get());
 		}
 
-
 		AnsaVector() = default;
 
 		void pushBack(const T& element)
@@ -89,10 +88,72 @@ namespace ansa
 			return std::numeric_limits<std::size_t>::max();
 		}
 
+		void insertAtIndex(const T& element, const std::size_t index)
+		{
+			assert(index <= mSize);
+			if (mSize == mCapacity)
+			{
+				mCapacity *= 2;
+			}
+			auto newSubarray = std::make_unique<T[]>(mCapacity);
+			auto ptr         = mData.get();
+			std::move(ptr, ptr + index, newSubarray.get());
+			newSubarray[index] = element;
+			std::move(ptr + index, ptr + mSize, newSubarray.get() + index + 1);
+			mData = std::move(newSubarray);
+			++mSize;
+		}
+
+		void prepend(const T& element)
+		{
+			if (mCapacity == 0)
+			{
+				mCapacity = 1;
+				mData     = std::make_unique<T[]>(mCapacity);
+			}
+			else
+			{
+				mCapacity += 1;
+				auto newSubarray = std::make_unique<T[]>(mCapacity);
+				auto ptr         = mData.get();
+				for (int i = mSize; i >= 0; --i)
+				{
+					newSubarray[i] = std::move(ptr[i - 1]);
+				}
+				mData = std::move(newSubarray);
+			}
+			mData[0] = element;
+			mSize += 1;
+		}
+
 		std::size_t size() const { return mSize; }
 		std::size_t capacity() const { return mCapacity; }
-		void        resize(const std::size_t newSize) { mSize = newSize; }
-		bool        isEmpty() const { return mSize == 0; }
+
+		void resize(const std::size_t newSize)
+		{
+			auto resizedArray = std::make_unique<T[]>(newSize);
+			std::move(mData.get(), mData.get() + std::min(mSize, newSize), resizedArray.get());
+			mData     = std::move(resizedArray);
+			mSize     = newSize;
+			mCapacity = newSize;
+		}
+
+		void reserve(const std::size_t reserveSize)
+		{
+			if (reserveSize <= mCapacity)
+			{
+				// The requested capacity is less than or equal to the current capacity.
+				return;
+			}
+
+			mCapacity      = reserveSize;
+			auto newMemory = std::make_unique<T[]>(mCapacity);
+			auto ptr       = mData.get();
+			std::move(ptr, ptr + std::min(reserveSize, mSize), newMemory.get());
+			mData = std::move(newMemory);
+		}
+
+		bool isEmpty() const { return mSize == 0; }
 
 		auto& at(const std::size_t index)
 		{
