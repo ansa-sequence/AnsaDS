@@ -1,178 +1,173 @@
 #pragma once
-#include <iostream>
+
+#include <cassert>
+#include <vector>
+
+#include "node.hpp"
 
 namespace ansa
 {
 	template <typename T>
-	struct ListNode
-	{
-		T         val;
-		ListNode* next;
-
-		ListNode() : val(0), next(nullptr)
-		{
-		}
-
-		ListNode(int x) : val(x), next(nullptr)
-		{
-		}
-
-		ListNode(int x, ListNode* next) : val(x), next(next)
-		{
-		}
-	};
-
-	template <typename T>
 	struct LinkedList
 	{
-		ListNode<T>* head = nullptr;
-		std::size_t  size = 0;
+		explicit LinkedList(Node<T>* init = nullptr) : mHead(init), mSize(init ? 1 : 0) {}
 
-		void print()
+		explicit LinkedList(const std::vector<T>& input) : mHead(nullptr), mSize(input.size())
 		{
-			auto current = head;
-			while (current != nullptr)
+			if (mSize == 0) return;
+
+			auto current = new Node<T>(input[0]);
+			mHead        = current;
+
+			for (std::size_t i = 1; i < mSize; ++i)
 			{
-				std::cout << current->val << ' ';
-				current = current->next;
+				current->next = new Node<T>(input[i]);
+				current       = current->next;
 			}
-			std::cout << '\n';
 		}
 
-		std::size_t getSize() const { return size; }
-
-		void insertionBegin(T val)
+		void pushFront(const T& element)
 		{
-			insertAtIndex(0, val);
+			Node<T>* newHead = new Node<T>(element);
+			newHead->next    = mHead;
+			mHead            = newHead;
+			++mSize;
 		}
 
-		void insertionEnd(T val)
+		void pushEnd(const T& element)
 		{
-			if (head == nullptr)
+			auto newNode = new Node<T>(element);
+
+			if (!mHead) { mHead = newNode; }
+			else
 			{
-				head = new ListNode<T>(val);
-				++size;
-				return;
+				Node<T>* current = mHead;
+				while (current->next) current = current->next;
+				current->next = newNode;
 			}
-			auto current = head;
-			while (current->next != nullptr)
-			{
-				current = current->next;
-			}
-			current->next = new ListNode<T>(val);
-			++size;
+
+			++mSize;
 		}
 
-		void insertAtIndex(std::size_t index, T val)
+		void popFront()
 		{
-			if (index > size || index < 0)
-			{
-				return;
-			}
+			if (!mHead) return;
 
-			if (index == 0)
+			const auto oldHead = mHead;
+			mHead              = mHead->next;
+			delete oldHead;
+			--mSize;
+		}
+
+		void popEnd()
+		{
+			if (!mHead) { return; }
+			if (!mHead->next)
 			{
-				const auto current = head;
-				const auto newNode = new ListNode<T>(val);
-				if (index == 0)
-				{
-					newNode->next = current;
-					head          = newNode;
-					++size;
-				}
+				delete mHead;
+				mHead = nullptr;
 			}
 			else
 			{
-				/*
-				 * For example we have a node with following structure :
-				 * 1 --> 2 --> 3 --> 4
-				 * We need to insert in position 1 new element
-				 * For it, we will iterate through the list and save current node.
-				 * After that, we create new node with some value, in our case it be a 5.
-				 * So, we find, what 2 - its 1 position.
-				 * Now, we will save node 2 as next node for new node
-				 * Node : 5 --> 2
-				 * For current node, where we have 2, we will save next element as 5 and next for 5, as we do it will be a 2.
-				 */
-				auto current = head;
-				for (std::size_t i = 0; i < index - 1; ++i)
-					current        = current->next;
+				auto current = mHead;
+				while (current->next->next) { current = current->next; }
+				delete current->next;
+				current->next = nullptr;
+			}
+			--mSize;
+		}
 
-				const auto newNode = new ListNode<T>(val);
-				newNode->next      = current->next;
-				current->next      = newNode;
-				++size;
+		void insert(const T& element, const std::size_t index)
+		{
+			assert(index <= mSize);
+
+			if (index == 0) { pushFront(element); }
+			else if (index == mSize) { pushEnd(element); }
+			else
+			{
+				auto newNode = new Node<T>(element);
+				auto prev    = findAt(index - 1);
+
+				newNode->next = prev->next;
+				prev->next    = newNode;
+
+				++mSize;
 			}
 		}
 
-		ListNode<T>* getNode(T val)
+		void erase(const std::size_t index)
 		{
-			auto current = head;
-			while (current != nullptr)
+			assert(index < mSize);
+
+			if (index == 0)
 			{
-				if (current->val == val)
-				{
-					return current;
-				}
+				auto toRemove = mHead;
+				mHead         = mHead->next;
+				delete toRemove;
+			}
+			else
+			{
+				auto prevNode  = findAt(index - 1);
+				auto toRemove  = prevNode->next;
+				prevNode->next = toRemove->next;
+				delete toRemove;
+			}
+
+			--mSize;
+		}
+
+		Node<T>* find(const T& element)
+		{
+			auto current = mHead;
+			while (current)
+			{
+				if (current->val == element) { return current; }
 				current = current->next;
 			}
 			return nullptr;
 		}
 
-		bool equal(const LinkedList<T>* rhs)
+		Node<T>* findAt(std::size_t index)
 		{
-			if (size != rhs->size)
+			assert(index < mSize);
+			auto current = mHead;
+			for (std::size_t i = 0; i < mSize; ++i)
 			{
-				return false;
+				if (i == index) { return current; }
+				current = current->next;
 			}
-			auto current    = head;
-			auto currentRhs = rhs->head;
-			while (current != nullptr && currentRhs != nullptr)
-			{
-				if (current->val != currentRhs->val)
-				{
-					return false;
-				}
-				current    = current->next;
-				currentRhs = currentRhs->next;
-			}
-			return true;
+			return nullptr;
+		}
+
+		std::size_t size() const { return mSize; }
+		bool        empty() const { return mSize == 0; }
+
+		Node<T>* front() const { return mHead; }
+
+		Node<T>* back() const
+		{
+			auto current = mHead;
+			while (current->next) { current = current->next; }
+			return current;
 		}
 
 		void reverse()
 		{
-			if (head == nullptr)
-			{
-				return;
-			}
-			auto         current  = head;
-			ListNode<T>* previous = nullptr;
-			while (current != nullptr)
+			Node<T>* prev    = nullptr;
+			Node<T>* current = mHead;
+
+			while (current)
 			{
 				auto next     = current->next;
-				current->next = previous;
-				previous      = current;
-
-				current = next;
+				current->next = prev;
+				prev          = current;
+				current       = next;
 			}
-			head = previous;
+			mHead = prev;
 		}
 
-		void deleteDuplicates()
-		{
-			auto current = head;
-			while (current && current->next)
-			{
-				auto next = current->next;
-				if (current->val == next->val)
-				{
-					current->next = next->next;
-				}
-				else
-				{
-					current = current->next;
-				}
-			}
-		}
+	private:
+		Node<T>*    mHead = nullptr;
+		std::size_t mSize{};
 	};
 }

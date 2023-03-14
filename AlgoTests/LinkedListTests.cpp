@@ -1,102 +1,102 @@
-#include <random>
-
 #include "gtest/gtest.h"
 #include "../src/linkedlist.hpp"
 
 namespace linkedListTest
 {
-	TEST(Insertion, InsertionIntoBegin)
+	TEST(LinkedListTest, PushFrontTest)
 	{
-		// Arrange
-		const auto list = new ansa::LinkedList<int>();
-		list->insertionBegin(4);
-		// Act
-		const auto result = list->getNode(4);
-		// Assert
-		EXPECT_EQ(4, result->val);
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushFront(1);
+		myList.pushFront(2);
+		myList.pushFront(3);
+
+		ASSERT_EQ(myList.size(), 3);
+		ASSERT_EQ(myList.front()->val, 3);
 	}
 
-	TEST(Insertion, insertionIntoEnd)
+	TEST(LinkedListTest, PushEndTest)
 	{
-		// Arrange
-		const auto list = new ansa::LinkedList<int>();
-		list->insertionEnd(4);
-		// Act
-		const auto result = list->getNode(4);
-		// Assert
-		EXPECT_EQ(4, result->val);
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(3);
+
+		ASSERT_EQ(myList.size(), 3);
+		ASSERT_EQ(myList.back()->val, 3);
 	}
 
-	TEST(Insertion, InsertionAtUnreachableIndex)
+	TEST(LinkedListTest, PopFrontTest)
 	{
-		// Arrange
-		const auto    list  = new ansa::LinkedList<int>();
-		constexpr int val   = 1;
-		constexpr int index = 10;
-		list->insertAtIndex(index, val);
-		// Act
-		const auto result = list->getNode(index);
-		// Assert
-		EXPECT_EQ(nullptr, result);
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(3);
+		myList.popFront();
+
+		ASSERT_EQ(myList.size(), 2);
+		ASSERT_EQ(myList.front()->val, 2);
 	}
 
-	TEST(Insertion, InsertionAtReachableIndex)
+	TEST(LinkedListTest, PopEndTest)
 	{
-		// Arrange
-		const auto    list  = new ansa::LinkedList<int>();
-		constexpr int val   = 1;
-		constexpr int index = 0;
-		list->insertAtIndex(index, val);
-		// Act
-		const auto result = list->getNode(val);
-		// Assert
-		EXPECT_EQ(1, result->val);
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(3);
+		myList.popEnd();
+
+		ASSERT_EQ(myList.size(), 2);
+		ASSERT_EQ(myList.back()->val, 2);
 	}
 
-	TEST(Insertion, InsertionInMiddle)
+	TEST(LinkedListTest, InsertTest)
 	{
-		// Arrange
-		const auto list = new ansa::LinkedList<int>();
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(4);
+		myList.insert(3, 2);
 
-		std::random_device                 rd;
-		std::mt19937                       mt(rd());
-		std::uniform_int_distribution<int> distribution(10, 10000);
-		for (int i = 0; i < distribution(mt); ++i)
-		{
-			list->insertionEnd(distribution(mt));
-		}
-		constexpr int val   = 1;
-		const int     index = static_cast<int>(list->getSize() / 2);
-		// Act
-		list->insertAtIndex(index, val);
-		const auto result = list->getNode(val);
-		// Assert
-		EXPECT_EQ(1, result->val);
+		ASSERT_EQ(myList.size(), 4);
+		ASSERT_EQ(myList.findAt(2)->val, 3);
 	}
 
-	TEST(Insertion, ValidNodeAfterInsertions)
+	TEST(LinkedListTest, EraseTest)
 	{
-		// Arrange
-		const auto list = new ansa::LinkedList<int>();
-		// Act
-		constexpr std::size_t elementCount = 10;
-		for (std::size_t i = 0; i < elementCount; ++i)
-		{
-			list->insertionEnd(static_cast<int>(i));
-		}
-		// Assert
-		const auto secondList = new ansa::LinkedList<int>();
-		secondList->insertionEnd(0);
-		secondList->insertionEnd(1);
-		secondList->insertionEnd(2);
-		secondList->insertionEnd(3);
-		secondList->insertionEnd(4);
-		secondList->insertionEnd(5);
-		secondList->insertionEnd(6);
-		secondList->insertionEnd(7);
-		secondList->insertionEnd(8);
-		secondList->insertionEnd(9);
-		const bool isTheSame = list->equal(secondList);
-		EXPECT_EQ(true, isTheSame);
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(3);
+		myList.erase(1);
+
+		ASSERT_EQ(myList.size(), 2);
+		ASSERT_EQ(myList.front()->val, 1);
+		ASSERT_EQ(myList.back()->val, 3);
+	}
+
+	TEST(LinkedListTest, FindTest)
+	{
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(3);
+
+		auto foundNode = myList.find(2);
+
+		ASSERT_NE(foundNode, nullptr);
+		ASSERT_EQ(foundNode->val, 2);
+	}
+
+	TEST(LinkedListTest, ReverseTest)
+	{
+		ansa::LinkedList<int> myList(nullptr);
+		myList.pushEnd(1);
+		myList.pushEnd(2);
+		myList.pushEnd(3);
+		myList.reverse();
+
+		ASSERT_EQ(myList.size(), 3);
+		ASSERT_EQ(myList.front()->val, 3);
+		ASSERT_EQ(myList.back()->val, 1);
 	}
 }
