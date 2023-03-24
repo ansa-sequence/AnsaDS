@@ -136,6 +136,7 @@
     <ClInclude Include="src\constraints.hpp" />
     <ClInclude Include="src\formulas.hpp" />
     <ClInclude Include="src\node.hpp" />
+    <ClInclude Include="src\queue.hpp" />
     <ClInclude Include="src\searching.hpp" />
     <ClInclude Include="src\sorting.hpp" />
     <ClInclude Include="src\binarytree.hpp" />
@@ -146,6 +147,9 @@
     <ClInclude Include="src\set.hpp" />
     <ClInclude Include="src\stack.hpp" />
     <ClInclude Include="src\vector.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LeetCodeProblems\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,15 +6,9 @@ namespace ansa
 	template <typename T>
 	struct Stack
 	{
-		explicit Stack(const std::vector<int>& elements)
-		{
-			mData = elements;
-		}
+		explicit Stack(const std::vector<int>& elements) { mData = elements; }
 
-		void push(T t)
-		{
-			mData.push_back(t);
-		}
+		void push(T t) { mData.push_back(t); }
 
 		void pop()
 		{
@@ -28,15 +22,9 @@ namespace ansa
 			return !mData.empty() ? *mData.crbegin() : throw std::length_error("Stack does not have elements!\n");
 		}
 
-		std::size_t size()
-		{
-			return mData.size();
-		}
+		std::size_t size() { return mData.size(); }
 
-		bool empty() const
-		{
-			return mData.empty();
-		}
+		bool empty() const { return mData.empty(); }
 
 	private:
 		std::vector<T> mData;

@@ -59,5 +59,11 @@
     <ClInclude Include="src\node.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\queue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LeetCodeProblems\README.md" />
   </ItemGroup>
 </Project>
