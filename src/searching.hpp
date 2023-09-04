@@ -30,7 +30,7 @@ namespace ansa
 
 		while (low <= high)
 		{
-			int mid = (low + high) / 2;
+			const int mid = (low + high) / 2;
 
 			if (vec[mid] == target)
 			{

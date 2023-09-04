@@ -6,4 +6,6 @@
 
 int main()
 {
+    ansa::AnsaVector<int> elements;
+    elements.pushBack(5);
 }
